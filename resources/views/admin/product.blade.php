@@ -41,6 +41,17 @@
         <!-- partial -->
         <div class="main-panel">
         <div class="content-wrapper">
+        @if(session()->has('message'))
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert"
+            aria-hidden="true">x</button>
+
+            {{session()->get('message')}}
+
+        </div>
+
+        @endif
         <div class="div_center">
         <h2 class="title">All Products</h2>
         </section>
@@ -49,22 +60,22 @@
                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #2779e2;">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Add Products</h3>
-                        <form class="form" action="{{url('/add_product')}}" method="POST">
+                        <form class="form" action="{{url('/add_product')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-4">
 
                             <div class="form-outline">
-                                <input type="text" id="productTitle" class="form-control form-control-lg" required />
-                                <label class="form-label" for="productTitle" name="title">Product Title</label>
+                                <input type="text" name="title" id="productTitle" class="form-control form-control-lg" required />
+                                <label class="form-label" for="productTitle" >Product Title</label>
                             </div>
 
                             </div>
                             <div class="col-md-6 mb-4">
 
                             <div class="form-outline">
-                                <input type="number" min="0" id="quantity" class="form-control form-control-lg" required />
-                                <label class="form-label" for="quantity" name="quantity">Quantity</label>
+                                <input type="number" name="quantity" min="0" id="quantity" class="form-control form-control-lg" required />
+                                <label class="form-label" for="quantity" >Quantity</label>
                             </div>
 
                             </div>
@@ -74,16 +85,16 @@
                             <div class="col-md-6 mb-4 d-flex align-items-center">
 
                             <div class="form-outline w-100">
-                                <input type="number" class="form-control form-control-lg" id="price" required />
-                                <label for="price" class="form-label" name="price">Price</label>
+                                <input type="number" name="price" class="form-control form-control-lg" id="price" required />
+                                <label for="price" class="form-label" >Price</label>
                             </div>
 
                             </div>
                             <div class="col-md-6 mb-4 d-flex align-items-center">
 
                             <div class="form-outline w-100">
-                                <input type="number" class="form-control form-control-lg" id="discountPrice" />
-                                <label for="discountPrice" class="form-label" name="discount_price">Discount_Price</label>
+                                <input type="number" name="discount_price" class="form-control form-control-lg" id="discountPrice" />
+                                <label for="discountPrice" class="form-label" >Discount_Price</label>
                             </div>
 
                             </div>
@@ -93,7 +104,7 @@
 
                             <div class="form-outline w-100">
                                 <textarea name="description" class="form-control form-control-lg" id="productDesc" rows="3" placeholder="Say something about your Product" required></textarea>
-                                <label for="discountPrice" class="form-label" name="discount_price">Description</label>
+                                <label for="discountPrice" class="form-label">Description</label>
                             </div>
 
                             </div>
@@ -101,9 +112,10 @@
 
                             <select class="select form-control form-control-lg" style="background-color: white">
                                 <option value="1" style="color:white;">Product Category</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                <option value="4">Four</option>
+                                @foreach ($data as $category)
+                                <option value="2">{{$category->category_name}}</option>
+                                @endforeach)
+
                             </select>
 
                         </div>
@@ -130,23 +142,6 @@
                 </div>
                 </div>
             </div>
-
-                <table class="display">
-                    <tr class="split">
-                        <td class="split">Product_name</td>
-                        <td class="split">Action</td>
-                    </tr>
-                    @foreach ($data as $data)
-                    <tr class="split">
-                        <td class="split">{{$data->title}}</td>
-                        <td>
-                            <!-- <a class="btn btn-primary">Update</a> -->
-                            <a onClick="return confirm('Are you sure you want to delete {{$data->title}}')" class="btn btn-danger" href="{{url('delete_product', $data->id)}}">Delete</a>
-                        </td>
-                    </tr>
-                    @endforeach
-
-                </table>
             </div>
         </div>
           <!-- content-wrapper ends -->
