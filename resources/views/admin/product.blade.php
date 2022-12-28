@@ -25,6 +25,10 @@
         border: 1px solid white;
         padding-bottom: 5px;
     }
+    .form-control{
+        background-color: white;
+        color: black;
+    }
   </style>
   <body>
     <div class="container-scroller">
@@ -38,13 +42,94 @@
         <div class="main-panel">
         <div class="content-wrapper">
         <div class="div_center">
-                <h2 class="title">All Products</h2>
+        <h2 class="title">All Products</h2>
+        </section>
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px; background-color: #2779e2;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Add Products</h3>
+                        <form class="form" action="{{url('/add_product')}}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
 
-                <form class="form" action="{{url('/add_product')}}" method="POST">
-                    @csrf
-                    <input type="text" name="category" class="text" placeholder="write product name">
-                    <input type="submit" name="submit" class="btn btn-primary" value="Add Product">
+                            <div class="form-outline">
+                                <input type="text" id="productTitle" class="form-control form-control-lg" required />
+                                <label class="form-label" for="productTitle" name="title">Product Title</label>
+                            </div>
+
+                            </div>
+                            <div class="col-md-6 mb-4">
+
+                            <div class="form-outline">
+                                <input type="number" min="0" id="quantity" class="form-control form-control-lg" required />
+                                <label class="form-label" for="quantity" name="quantity">Quantity</label>
+                            </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                            <div class="form-outline w-100">
+                                <input type="number" class="form-control form-control-lg" id="price" required />
+                                <label for="price" class="form-label" name="price">Price</label>
+                            </div>
+
+                            </div>
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                            <div class="form-outline w-100">
+                                <input type="number" class="form-control form-control-lg" id="discountPrice" />
+                                <label for="discountPrice" class="form-label" name="discount_price">Discount_Price</label>
+                            </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                            <div class="form-outline w-100">
+                                <textarea name="description" class="form-control form-control-lg" id="productDesc" rows="3" placeholder="Say something about your Product" required></textarea>
+                                <label for="discountPrice" class="form-label" name="discount_price">Description</label>
+                            </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+                            <select class="select form-control form-control-lg" style="background-color: white">
+                                <option value="1" style="color:white;">Product Category</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="4">Four</option>
+                            </select>
+
+                        </div>
+                        </div>
+
+
+                        <div class="row">
+                        <div class="col-md-9 pe-5">
+
+                            <input class="form-control form-control-lg" id="formFileLg" type="file" name="image" required />
+                            <div class="small text-muted mt-2" style="color:white;">Upload your Product image or any other relevant file. Max file
+                            size 50 MB</div>
+
+                        </div>
+
+                        </div>
+
+                        <div class="mt-4 pt-2">
+                            <input class="btn btn-primary btn-lg" type="submit" value="Add Product" />
+                        </div>
+                    </div>
+
                 </form>
+                </div>
+                </div>
+            </div>
 
                 <table class="display">
                     <tr class="split">
